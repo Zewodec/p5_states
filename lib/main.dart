@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p5_states/instagram_post.dart';
 import 'package:p5_states/me_subscribed.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
