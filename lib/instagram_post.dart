@@ -6,7 +6,6 @@ class InstagramPost extends StatelessWidget {
   final String imageUrl;
   final int likes;
   final List<String> comments;
-  final Function(String) onAddNickname;
 
   const InstagramPost({
     super.key,
@@ -14,7 +13,6 @@ class InstagramPost extends StatelessWidget {
     required this.imageUrl,
     required this.likes,
     required this.comments,
-    required this.onAddNickname,
   });
 
   get avatarImageURL => 'https://picsum.photos/300';
@@ -42,7 +40,6 @@ class InstagramPost extends StatelessWidget {
                         nickname: nickname,
                         imageUrl: imageUrl,
                         avatarImageUrl: avatarImageURL,
-                        onAddNickname: onAddNickname,
                       ),
                       // ),
                     ),

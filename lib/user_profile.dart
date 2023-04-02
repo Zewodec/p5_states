@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:p5_states/models/user_subscribed_model.dart';
+import 'package:provider/provider.dart';
 
 class UserProfile extends StatefulWidget {
   final String nickname;
   final String imageUrl;
   final String avatarImageUrl;
-  final Function(String) onAddNickname;
 
-  const UserProfile({Key? key,
-    required this.nickname,
-    required this.imageUrl,
-    required this.avatarImageUrl,
-    required this.onAddNickname})
+  const UserProfile(
+      {Key? key,
+      required this.nickname,
+      required this.imageUrl,
+      required this.avatarImageUrl})
       : super(key: key);
 
   @override
@@ -57,17 +58,19 @@ class _UserProfileState extends State<UserProfile> {
                 width: 100,
               ),
               ElevatedButton(
-                onPressed: _isButtonPressed ? null : () {
-                  setState(() {
-                    _isButtonPressed = true;
-                  });
-                  widget.onAddNickname(widget.nickname);
-                },
+                onPressed: _isButtonPressed
+                    ? null
+                    : () {
+                        setState(() {
+                          _isButtonPressed = true;
+                        });
+                        Provider.of<UserSubscribedModel>(context, listen: false)
+                            .addNickname(widget.nickname);
+                      },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: _isButtonPressed ? Colors.grey : null,
                 ),
                 child: Text(_isButtonPressed ? 'Subscribed♥' : 'Subscribe'),
-
               ),
             ],
           ),

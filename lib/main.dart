@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:p5_states/instagram_post.dart';
 import 'package:p5_states/me_subscribed.dart';
 import 'package:p5_states/models/user_subscribed_model.dart';
@@ -17,11 +18,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'State Project',
+      title: 'ChangeNotifier Project',
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: const MyHomePage(title: 'State project Home'),
+      home: const MyHomePage(title: 'ChangeNotifier project Home'),
     );
   }
 }
@@ -36,13 +37,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Set<String> nicknames = {};
-
-  void addNickname(String nickname) {
-    setState(() {
-      nicknames.add(nickname);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,32 +49,48 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MeSubscribedOn(
-                      nicknames: nicknames.toList(),
-                    ),
+                    builder: (context) => const MeSubscribedOn(),
                   ),
                 );
               },
-              icon: const Icon(Icons.people))
+              icon: const Icon(Icons.people)),
+          IconButton(
+              onPressed: () {
+                Provider.of<UserSubscribedModel>(context, listen: false)
+                    .clearAllNickNames();
+                Fluttertoast.showToast(
+                  msg: 'All Subscribers Cleared',
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  backgroundColor: Colors.black54,
+                  textColor: Colors.white,
+                  fontSize: 16.0,
+                );
+              },
+              icon: const Icon(Icons.delete))
         ],
       ),
       body: Center(
         child: ListView(
           // mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: const <Widget>[
             InstagramPost(
               nickname: 'Zewodec',
               imageUrl: 'https://picsum.photos/600',
               likes: 3,
-              comments: const ['Great photo!', 'Love it!', 'Nice job!'],
-              onAddNickname: addNickname,
+              comments: ['Great photo!', 'Love it!', 'Nice job!'],
             ),
             InstagramPost(
               nickname: 'Mike',
               imageUrl: 'https://picsum.photos/601',
               likes: 66,
-              comments: const ['Wow!', 'Let\'s GO!'],
-              onAddNickname: addNickname,
+              comments: ['Wow!', 'Let\'s GO!'],
+            ),
+            InstagramPost(
+              nickname: 'Navy',
+              imageUrl: 'https://picsum.photos/602',
+              likes: 103,
+              comments: ['OMG!', 'That is great!'],
             )
           ],
         ),
