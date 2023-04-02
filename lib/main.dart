@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:p5_states/instagram_post.dart';
 import 'package:p5_states/me_subscribed.dart';
+import 'package:p5_states/models/user_subscribed_model.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => UserSubscribedModel(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
