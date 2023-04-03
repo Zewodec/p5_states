@@ -56,8 +56,6 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.people)),
           IconButton(
               onPressed: () {
-                Provider.of<UserSubscribedModel>(context, listen: false)
-                    .clearAllNickNames();
                 Fluttertoast.showToast(
                   msg: 'All Subscribers Cleared',
                   toastLength: Toast.LENGTH_SHORT,
@@ -66,6 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   textColor: Colors.white,
                   fontSize: 16.0,
                 );
+                Provider.of<UserSubscribedModel>(context, listen: false)
+                    .clearAllNickNames();
               },
               icon: const Icon(Icons.delete))
         ],
